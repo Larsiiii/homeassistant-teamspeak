@@ -1,11 +1,11 @@
-"""Adds config flow for Blueprint."""
+"""Adds config flow for Teamspeak 3."""
 from homeassistant import config_entries
 from homeassistant.core import callback
-from homeassistant.helpers.aiohttp_client import async_create_clientsession
 import voluptuous as vol
 
-from .api import IntegrationBlueprintApiClient
+from .api import TeamspeakApiClient
 from .const import (
+    CONF_HOST,
     CONF_PASSWORD,
     CONF_USERNAME,
     DOMAIN,
@@ -13,8 +13,8 @@ from .const import (
 )
 
 
-class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
-    """Config flow for Blueprint."""
+class TeamspeakFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
+    """Config flow for Teamspeak 3 Server."""
 
     VERSION = 1
     CONNECTION_CLASS = config_entries.CONN_CLASS_CLOUD_POLL
@@ -33,11 +33,13 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
 
         if user_input is not None:
             valid = await self._test_credentials(
-                user_input[CONF_USERNAME], user_input[CONF_PASSWORD]
+                user_input[CONF_HOST],
+                user_input[CONF_USERNAME],
+                user_input[CONF_PASSWORD],
             )
             if valid:
                 return self.async_create_entry(
-                    title=user_input[CONF_USERNAME], data=user_input
+                    title=user_input[CONF_HOST], data=user_input
                 )
             else:
                 self._errors["base"] = "auth"
@@ -46,26 +48,30 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
 
         return await self._show_config_form(user_input)
 
-    @staticmethod
-    @callback
-    def async_get_options_flow(config_entry):
-        return BlueprintOptionsFlowHandler(config_entry)
+    # Uncomment the next 4 lines to enable options flow handler:
+    # @staticmethod
+    # @callback
+    # def async_get_options_flow(config_entry):
+    #     return TeamspeakOptionsFlowHandler(config_entry)
 
     async def _show_config_form(self, user_input):  # pylint: disable=unused-argument
         """Show the configuration form to edit location data."""
         return self.async_show_form(
             step_id="user",
             data_schema=vol.Schema(
-                {vol.Required(CONF_USERNAME): str, vol.Required(CONF_PASSWORD): str}
+                {
+                    vol.Required(CONF_HOST): str,
+                    vol.Required(CONF_USERNAME): str,
+                    vol.Required(CONF_PASSWORD): str,
+                }
             ),
             errors=self._errors,
         )
 
-    async def _test_credentials(self, username, password):
+    async def _test_credentials(self, host, username, password):
         """Return true if credentials is valid."""
         try:
-            session = async_create_clientsession(self.hass)
-            client = IntegrationBlueprintApiClient(username, password, session)
+            client = TeamspeakApiClient(host, username, password)
             await client.async_get_data()
             return True
         except Exception:  # pylint: disable=broad-except
@@ -73,8 +79,8 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         return False
 
 
-class BlueprintOptionsFlowHandler(config_entries.OptionsFlow):
-    """Blueprint config flow options handler."""
+class TeamspeakOptionsFlowHandler(config_entries.OptionsFlow):
+    """Teamspeak 3 config flow options handler."""
 
     def __init__(self, config_entry):
         """Initialize HACS options flow."""
@@ -104,5 +110,5 @@ class BlueprintOptionsFlowHandler(config_entries.OptionsFlow):
     async def _update_options(self):
         """Update config entry options."""
         return self.async_create_entry(
-            title=self.config_entry.data.get(CONF_USERNAME), data=self.options
+            title=self.config_entry.data.get(CONF_HOST), data=self.options
         )

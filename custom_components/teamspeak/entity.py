@@ -1,10 +1,10 @@
-"""BlueprintEntity class"""
+"""Teamspeak 3 Server entity class"""
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN, NAME, VERSION, ATTRIBUTION
+from .const import DOMAIN, NAME, VERSION, MANUFACTURER, ATTRIBUTION
 
 
-class IntegrationBlueprintEntity(CoordinatorEntity):
+class TeamspeakEntity(CoordinatorEntity):
     def __init__(self, coordinator, config_entry):
         super().__init__(coordinator)
         self.config_entry = config_entry
@@ -18,9 +18,9 @@ class IntegrationBlueprintEntity(CoordinatorEntity):
     def device_info(self):
         return {
             "identifiers": {(DOMAIN, self.unique_id)},
-            "name": NAME,
-            "model": VERSION,
-            "manufacturer": NAME,
+            "name": self.name,
+            "model": self.coordinator.data.get("serverinfo").get("version"),
+            "manufacturer": MANUFACTURER,
         }
 
     @property

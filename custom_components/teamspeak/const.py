@@ -1,27 +1,27 @@
-"""Constants for integration_blueprint."""
+"""Constants for teamspeak."""
 # Base component constants
-NAME = "Integration blueprint"
-DOMAIN = "integration_blueprint"
+NAME = "Teamspeak 3 Server"
+DOMAIN = "teamspeak"
 DOMAIN_DATA = f"{DOMAIN}_data"
-VERSION = "0.0.1"
-ATTRIBUTION = "Data provided by http://jsonplaceholder.typicode.com/"
-ISSUE_URL = "https://github.com/custom-components/integration_blueprint/issues"
+VERSION = "0.1.0"
+MANUFACTURER = "TeamSpeak Systems, Inc"
+ATTRIBUTION = f"Data from this is provided by a Teamspeak 3 Server by {MANUFACTURER}."
+ISSUE_URL = "https://github.com/Larsiiii/teamspeak-homeassistant-integration/issues"
 
 # Icons
-ICON = "mdi:format-quote-close"
+ICON = "mdi:headset"
 
 # Device classes
 BINARY_SENSOR_DEVICE_CLASS = "connectivity"
 
 # Platforms
-BINARY_SENSOR = "binary_sensor"
 SENSOR = "sensor"
-SWITCH = "switch"
-PLATFORMS = [BINARY_SENSOR, SENSOR, SWITCH]
+PLATFORMS = [SENSOR]
 
 
 # Configuration and options
 CONF_ENABLED = "enabled"
+CONF_HOST = "host"
 CONF_USERNAME = "username"
 CONF_PASSWORD = "password"
 
