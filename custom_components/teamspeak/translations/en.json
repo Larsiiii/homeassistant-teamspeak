@@ -1,0 +1,33 @@
+{
+    "config": {
+        "title": "Teamspeak Server",
+        "step": {
+            "user": {
+                "title": "Teamspeak Server",
+                "description": "Set up your Teamspeak 3 Server instance to allow monitoring and control. If you need help with the configuration have a look here: https://github.com/Larsiiii/teamspeak-homeassistant-integration",
+                "data": {
+                    "host": "Host",
+                    "username": "Username",
+                    "password": "Password"
+                }
+            }
+        },
+        "error": {
+            "auth": "Could not connect to the Teamspeak 3 server instance. Maybe Username/Password is wrong or server might not be running."
+        },
+        "abort": {
+            "single_instance_allowed": "Only a single configuration of Teamspeak 3 Server is allowed."
+        }
+    },
+    "options": {
+        "step": {
+            "user": {
+                "data": {
+                    "binary_sensor": "Binary sensor enabled",
+                    "sensor": "Sensor enabled",
+                    "switch": "Switch enabled"
+                }
+            }
+        }
+    }
+}

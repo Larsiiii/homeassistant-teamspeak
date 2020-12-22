@@ -1,0 +1,14 @@
+{
+  "domain": "teamspeak",
+  "name": "Teamspeak 3 Server",
+  "documentation": "https://github.com/Larsiiii/teamspeak-homeassistant-integration",
+  "issue_tracker": "https://github.com/Larsiiii/teamspeak-homeassistant-integration/issues",
+  "dependencies": [],
+  "config_flow": true,
+  "codeowners": [
+    "@Larsiiii"
+  ],
+  "requirements": [
+    "ts3==1.0.11"
+  ]
+}
