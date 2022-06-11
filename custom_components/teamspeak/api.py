@@ -43,8 +43,8 @@ class TeamspeakApiClient:
             # data = self.client.get_data()
             self._session.use(sid=1)
             serverinfo = self._session.serverinfo().parsed[0]
-            clientlist = self._session.clientlist().parsed[0]
-            channellist = self._session.channellist().parsed[0]
+            clientlist = self._session.clientlist().parsed
+            channellist = self._session.channellist().parsed
             # self.terminate_connection()
             return {
                 "clients": clientlist,

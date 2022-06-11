@@ -84,6 +84,6 @@ If you want to contribute to this please read the [Contribution guidelines](CONT
 [teamspeak3_server]: https://www.teamspeak.com/en/
 [hacs]: https://github.com/custom-components/hacs
 [hacsbadge]: https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge
-[license-shield]: https://img.shields.io/github/license/Larsiiii/teamspeak-homeassistant-integration.svg?style=for-the-badge
-[releases-shield]: https://img.shields.io/github/release/Larsiiii/teamspeak-homeassistant-integration.svg?style=for-the-badge
-[releases]: https://github.com/Larsiiii/teamspeak-homeassistant-integration/releases
+[license-shield]: https://img.shields.io/github/license/Larsiiii/homeassistant-teamspeak.svg?style=for-the-badge
+[releases-shield]: https://img.shields.io/github/release/Larsiiii/homeassistant-teamspeak.svg?style=for-the-badge
+[releases]: https://github.com/Larsiiii/homeassistant-teamspeak/releases
