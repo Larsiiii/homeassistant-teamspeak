@@ -15,13 +15,20 @@ class TeamspeakSensor(TeamspeakEntity):
     @property
     def name(self):
         """Return the name of the sensor."""
-        # return f"{DEFAULT_NAME}_{SENSOR}"
-        return self.coordinator.data.get("serverinfo").get("name")
+        serverinfo = self.coordinator.data.get("serverinfo")
+        if serverinfo is not None:
+            return self.coordinator.data.get("serverinfo").get("name")
+        else:
+            return "No Connection to Server"
 
     @property
     def state(self):
         """Return the state of the sensor."""
-        return self.coordinator.data.get("serverinfo").get("status")
+        serverinfo = self.coordinator.data.get("serverinfo")
+        if serverinfo is not None:
+            return self.coordinator.data.get("serverinfo").get("status")
+        else:
+            return "No Connection to Server"
 
     @property
     def icon(self):
@@ -29,6 +36,6 @@ class TeamspeakSensor(TeamspeakEntity):
         return ICON
 
     @property
-    def device_state_attributes(self):
+    def extra_state_attributes(self):
         """Return the state attributes."""
         return self.coordinator.data

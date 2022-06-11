@@ -1,10 +1,5 @@
 """Teamspeak 3 API Client."""
 import logging
-import asyncio
-import socket
-from typing import Optional
-import aiohttp
-import async_timeout
 import ts3
 
 TIMEOUT = 10
@@ -14,8 +9,10 @@ _LOGGER: logging.Logger = logging.getLogger(__package__)
 
 
 class TeamspeakApiClient:
+    """Teamspeak API Client."""
+
     def __init__(self, host: str, username: str, password: str) -> None:
-        """Sample API Client."""
+        """API Client constructor."""
         self._host = host
         self._username = username
         self._password = password
@@ -34,10 +31,12 @@ class TeamspeakApiClient:
             )
 
     def terminate_connection(self):
+        """Terminate connection to teamspeak3 server."""
         self._session.quit()
         self._session = None
 
     async def async_get_data(self) -> dict:
+        """Get data from teamspeak3 server."""
         if self._session is None:
             self.establish_connection(self._host, self._username, self._password)
         try:
